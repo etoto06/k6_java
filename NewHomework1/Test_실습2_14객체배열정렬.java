@@ -1,34 +1,67 @@
-package Chap2_기본자료구조;
+package NewHomework1;
 
 import java.util.Arrays;
 //구글링해서 comparator, comparable 차이, 사용예시 파악
+//Comparable은 자기 자신과 매개변수 객체를 비교
+//Comparator는 두 매개변수 객체를 비교
 //5번 실습 - 2장 실습 2-14를 수정하여 객체 배열의 정렬 구현
-class PhyscData implements Comparable<PhyscData>{  // implements Comparable<PhyscData> 
+class PhyscData implements Comparable<PhyscData>{// implements Comparable<PhyscData> 
 	String name;
 	int height;
 	double vision;
 
 	@Override
-	public String toString() {
-
+	public String toString() {//객제들의 정보를 문자열로 반환 
+		return "이름"+name+", 키"+ height + ", 시력"+vision;
 	}
 	@Override
 	public int compareTo(PhyscData p) {
-
+		if(this.height > p.height || this.vision > p.vision) {
+			return 1;
+		}
+		else if(this.height == p.height) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
 	}
-	public int equals(PhyscData p) {
-
+	
+	public boolean equals(PhyscData p) {
+	    if (this == p) {
+	        return true;
+	    }
+	    if (p == null || getClass() != p.getClass()) {
+	        return false;
+	    }
+	    PhyscData other = (PhyscData) p;
+	    return height == other.height && vision == other.vision;
 	}
+
+//	public int equals(PhyscData p) {
+//		if (this == p {
+//	        return 1;
+//	    }
+//	    if (p== null || getClass() != p.getClass()) {
+//	        return 0;
+//	    }
+//	    PhyscData other = (PhyscData) p;
+//	    return height == p.height && vision == p.vision;
+//		
+//	}
 }
-public class 실습2_14객체배열정렬 {
+public class Test_실습2_14객체배열정렬 {
 	static void swap(PhyscData[]arr, int ind1, int ind2) {
-		
+	 int t[] = arr[ind1]; 
+		arr[ind1]=arr[ind2];
+		arr[ind1]= t;
 	}
 	static void sortData(PhyscData []arr) {
-		for( int i =0;)
-			for(int j = 0;)
-				if (arr[i] > arr[j])
-					swap(arr,i,j)
+//		for( int i =0;)
+//			for(int j = 0;)
+//				if (arr[i].compareTo(null) > arr[j])
+//					swap(arr,i,j)
+					Arrays.sort(arr);
 	}
 	public static void main(String[] args) {
 		PhyscData[] data = {

@@ -3,7 +3,8 @@ package NewHomework1;
 public class Test_실습2_14스트링배열정렬 {
 	public class 실습2_14스트링배열정렬 {
 		public static void main(String[] args) {
-			String[] data = { "apple", "grape", "persimmon", "pear", "blueberry", "strawberry", "melon",
+			String[] data = { "apple", "grape", "persimmon", "pear", 
+					"blueberry", "strawberry", "melon",
 					"oriental melon" };
 
 			showData(data);
