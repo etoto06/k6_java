@@ -1,5 +1,7 @@
 package homework;
 
+import NewHomework1.Matrix;
+
 public class HT {
 
 

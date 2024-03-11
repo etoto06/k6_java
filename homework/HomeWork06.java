@@ -1,6 +1,8 @@
 /* 클래스 메소드 구현 실습 목적*/
 package homework;
 
+import NewHomework1.Matrix;
+
 class Matrix {
 	int rows;
 	int cols;

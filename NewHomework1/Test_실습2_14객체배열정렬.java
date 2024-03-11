@@ -19,7 +19,7 @@ class PhyscData implements Comparable<PhyscData>{// implements Comparable<PhyscD
 		if(this.height > p.height || this.vision > p.vision) {
 			return 1;
 		}
-		else if(this.height == p.height) {
+		else if(this.height == p.height|| this.vision == p.vision) {
 			return 0;
 		}
 		else {
@@ -27,41 +27,47 @@ class PhyscData implements Comparable<PhyscData>{// implements Comparable<PhyscD
 		}
 	}
 	
+	
 	public boolean equals(PhyscData p) {
-	    if (this == p) {
-	        return true;
-	    }
-	    if (p == null || getClass() != p.getClass()) {
-	        return false;
-	    }
-	    PhyscData other = (PhyscData) p;
-	    return height == other.height && vision == other.vision;
-	}
-
+	if (this == p) {
+        return true;
+    }
+    if (p== null || getClass() != p.getClass()) {
+        return false;
+        
+    }
+    PhyscData other = (PhyscData) p;
+    return height == p.height && vision == p.vision;
+    }
+}
+	
 //	public int equals(PhyscData p) {
-//		if (this == p {
-//	        return 1;
+//		if (this == p) {
+//	        return true;
 //	    }
 //	    if (p== null || getClass() != p.getClass()) {
-//	        return 0;
+//	        return false;
 //	    }
 //	    PhyscData other = (PhyscData) p;
 //	    return height == p.height && vision == p.vision;
 //		
 //	}
-}
+//}
 public class Test_실습2_14객체배열정렬 {
-	static void swap(PhyscData[]arr, int ind1, int ind2) {
-	 int t[] = arr[ind1]; 
-		arr[ind1]=arr[ind2];
-		arr[ind1]= t;
+	
+	static void swap(PhyscData[] arr, int ind1, int ind2) {
+		PhyscData t = arr[ind1]; 
+		arr[ind1]  = arr[ind2];
+		arr[ind2]  = t;
 	}
+
 	static void sortData(PhyscData []arr) {
-//		for( int i =0;)
-//			for(int j = 0;)
-//				if (arr[i].compareTo(null) > arr[j])
-//					swap(arr,i,j)
-					Arrays.sort(arr);
+		for( int i =0; i <arr.length-1 ; i++) {
+			for(int j = 0; j< arr.length-1 -i ; j++) {
+				if (arr[j].compareTo(arr[j+1]) > 0 )
+					swap(arr,i,j+1);
+			}
+		}
 	}
 	public static void main(String[] args) {
 		PhyscData[] data = {
@@ -79,7 +85,9 @@ public class Test_실습2_14객체배열정렬 {
 		showData(data);
 	}
 	static void showData(PhyscData[]arr) {
-
+		for (PhyscData data : arr) {
+			System.out.println(data);
+		}
+		System.out.println();
 	}
-
 }

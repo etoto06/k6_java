@@ -1,4 +1,4 @@
-package com.ruby.java.ch06;
+package NewHomework1;
 /*
  * 클래스 메소드 구현 실습 목적
  */

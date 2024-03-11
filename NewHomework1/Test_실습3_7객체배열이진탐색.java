@@ -30,8 +30,9 @@ class Fruit4 {
 		return name;
 	}
 }
+
 //교재 123~129 페이지 참조하여 구현
-class FruitNameComparator2 implements Comparator<Fruit4>{
+class FruitNameComparator2 implements Comparator<Fruit4>{ 
 	public int compare(Fruit4 f1, Fruit4 f2) {
 
 
@@ -50,6 +51,7 @@ public class Test_실습3_7객체배열이진탐색 {
 				if (cc.compare(arr[i],arr[j])> 0) swap(arr, i, j);
 		}
 	}
+
 
 	public static void main(String[] args) {
 
@@ -81,7 +83,7 @@ public class Test_실습3_7객체배열이진탐색 {
 		
 		Arrays.sort(arr, (a, b) -> a.getPrice() - b.getPrice()); // Fruit4에 compareTo()가 있어도 람다식 우선 적용
 		showData("람다식: (a, b) -> a.getPrice() - b.getPrice()을 사용한 Arrays.sort(arr, cc) 정렬 후", arr);
-
+ 
 		System.out.println("\n익명클래스 객체로 정렬(가격)후 객체 배열: ");
 		Arrays.sort(arr, new Comparator<Fruit4>() {
 			@Override
@@ -133,4 +135,20 @@ public class Test_실습3_7객체배열이진탐색 {
 	}
 
 }
+
+
+
+//comparator<T>{           <T 대신 fruit 입력하면 밑에써도 
+//int compare(T a,T a1);
+//비교연산자는 fruit 객체에 대해 비교 
+//
+
+
+
+
+
+
+
+
+
 

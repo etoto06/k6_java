@@ -5,6 +5,7 @@ package Chap3_검색;
  * 함수(메소드) 전체를 작성하는 훈련 
  */
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 public class Test_스트링배열합병 {
     static void showList(String topic, String [] list) {
@@ -19,9 +20,9 @@ public class Test_스트링배열합병 {
     public static void main(String[] args) {
 	String[] s1 = { "홍길동", "강감찬", "을지문덕", "계백", "김유신" };
 	String[] s2 = {"독도", "울릉도", "한산도", "영도", "우도"};
-	Arrays.sort(s1);
+	Arrays.sort(s1);	Comparable , Comparator도 없다 > compa
 	Arrays.sort(s2);
-	
+//후속코딩은 객체들의 정렬 : Students 클래스를 만들고 정렬 
 	showList("s1배열 = ", s1);
 	showList("s2배열 = ", s2);
 
