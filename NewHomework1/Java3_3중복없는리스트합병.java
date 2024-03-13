@@ -1,4 +1,4 @@
-package Chap3_검색;
+package NewHomework1;
 
 //중복이 없는 리스트를 merge하는 버젼
 
@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Test_중복없는리스트합병 {
+public class Java3_3중복없는리스트합병 {
 //string 정렬, binary search 구현
 //1단계: string, 2단계: string 객체,  Person 객체들의 list\
 //file1: 서울,북경,상해,서울,도쿄, 뉴욕,부산
@@ -24,7 +24,6 @@ public class Test_중복없는리스트합병 {
 
 	static ArrayList<String> removeDuplicate(ArrayList<String> al) {
 		//구현할 부분 : 리스트에서 중복을 제거한다, 정렬후 호출하는 것을 전제로 구현
-
 
 		return list1;
 	}

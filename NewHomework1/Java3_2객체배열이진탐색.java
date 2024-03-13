@@ -1,9 +1,13 @@
-package Chap3_검색;
+package NewHomework1;
 
-public class Test_실습3_7객체배열이진탐색 {
+public class Java3_2객체배열이진탐색{
 
+public Fruit4(String string, int i, String string2) {
+	// TODO Auto-generated constructor stub
+	this.string = string;
+	this.i = i;
+	this.string2 = string2;
 }
-package Chap3_검색;
 
 //3장 객체 배열 정렬 - binary search
 /*
@@ -21,8 +25,6 @@ class Fruit4 {
 	int price;
 	String expire;
 
-
-
 	public int getPrice() {
 		return price;
 	}
@@ -34,13 +36,14 @@ class Fruit4 {
 //교재 123~129 페이지 참조하여 구현
 class FruitNameComparator2 implements Comparator<Fruit4>{ 
 	public int compare(Fruit4 f1, Fruit4 f2) {
-
-
+		return (f1.price > f2.price) ? 1 :
+			   (f1.price < f2.price) ? -1 :0;
 	}
+	
 public class Test_실습3_7객체배열이진탐색 {
 
 	private static void sortData(Fruit4[] arr, Comparator<Fruit4> cc_price) {
-
+		Arrays.sort(arr, cc_price);
 	}
 	static void swap(Fruit4[]arr, int ind1, int ind2) {
 		Fruit4 temp = arr[ind1]; arr[ind1] = arr[ind2]; arr[ind2] = temp;
@@ -141,12 +144,6 @@ public class Test_실습3_7객체배열이진탐색 {
 //comparator<T>{           <T 대신 fruit 입력하면 밑에써도 
 //int compare(T a,T a1);
 //비교연산자는 fruit 객체에 대해 비교 
-//
-
-
-
-
-
 
 
 

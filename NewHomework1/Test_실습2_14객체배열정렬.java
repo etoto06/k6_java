@@ -9,7 +9,13 @@ class PhyscData implements Comparable<PhyscData>{// implements Comparable<PhyscD
 	String name;
 	int height;
 	double vision;
-
+	
+	public PhyscData (String name ,int height , double vision) {
+		this.name = name;
+		this.height = height;
+		this.vision = vision;
+	}
+	
 	@Override
 	public String toString() {//객제들의 정보를 문자열로 반환 
 		return "이름"+name+", 키"+ height + ", 시력"+vision;
