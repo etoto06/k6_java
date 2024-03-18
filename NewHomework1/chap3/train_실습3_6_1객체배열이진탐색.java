@@ -1,4 +1,4 @@
-package Chap3_검색;
+package NewHomework1.chap3;
 
 /*
  * Comparable 구현
@@ -15,6 +15,14 @@ class PhyscData2 implements Comparable<PhyscData2>{
 	int height;
 	double vision;
 
+	static void showData(String[] data) {
+		for (int i=0; i<data.length; i++) {
+			System.out.println("data["+i+"]="+data[i]);
+		}
+	}
+	static void sortData(String[] data) {
+	    Arrays.sort(data);
+	}
 	@Override
 	public String toString() {
 		
@@ -27,6 +35,7 @@ class PhyscData2 implements Comparable<PhyscData2>{
 		
 	}
 }
+
 public class train_실습3_6_1객체배열이진탐색 {
 
 

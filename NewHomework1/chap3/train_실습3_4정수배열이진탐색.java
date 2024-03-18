@@ -1,4 +1,4 @@
-package Chap3_검색;
+package NewHomework1.chap3;
 
 //3장 - 1번 실습 과제 > 2번 실습: 스트링 객체의 정렬과 이진 탐색 > 3번 실습: 객체 정렬과 이진 탐색
 //comparator 구현 실습
@@ -9,20 +9,22 @@ package Chap3_검색;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
 public class train_실습3_4정수배열이진탐색 {
 
 	public static void main(String[] args) {
-		int []data = new int[10];
+		int[] data = new int[10];
 		inputData(data);// 구현 반복 숙달 훈련
 
 		showList("정렬 전 배열[]:: ", data);
 		sortData(data);// 구현 반복 숙달 훈련
-		//Arrays.sort(data);
+		// Arrays.sort(data);
 		showList("정렬 후 배열[]:: ", data);// 구현 반복 숙달 훈련
 
 		int key = 13;
-		int resultIndex = linearSearch(data, key);//교재 99-100:실습 3-1 참조, 교재 102: 실습 3-2
-		//Arrays 클래스에 linear search는 없다
+		int resultIndex = linearSearch(data, key);
+		// 교재 99-100:실습 3-1 참조, 교재 102: 실습 3-2
+		// Arrays 클래스에 linear search는 없다
 		System.out.println("\nlinearSearch(13): result = " + resultIndex);
 
 		key = 19;
@@ -31,7 +33,7 @@ public class train_실습3_4정수배열이진탐색 {
 		 */
 		resultIndex = binarySearch(data, key);
 		System.out.println("\nbinarySearch(19): result = " + resultIndex);
-		
+
 		key = 10;
 		/*
 		 * 교재 115 Arrays.binarySearch에 의한 검색
@@ -41,14 +43,47 @@ public class train_실습3_4정수배열이진탐색 {
 
 	}
 
-
-	static int linearSearch(int[]item, int key) {
-
+	static void inputData( int[] data) {
+		for (int i = 0; i < data.length; i++) {
+			data[i] = (int) (Math.random() * 20);
+		}
+	}
+	
+	static void showList(String message,int[] data) {
+		for (int i=0; i < data.length; i++) {
+			System.out.println("data["+i+"]="+data[i]);
+		}
 	}
 
-	static int binarySearch(int[]item, int key) {
+	static void sortData(int[] data) {
+		Arrays.sort(data);
+	}
+
+	static int linearSearch(int[] item, int key) {
+		for(int i=0; i< item.length ; i++) {
+			if (item[i]==key) {
+				return i; //검색을 성공하면 인덱스 i를 반환
+			}
+		}
+		return -1; //검색실패시 -1을 반환
+	}
+
+	static int binarySearch(int[] item, int key) {
 		int pl = 0;
-		int pr = item.length-1;
-
+		int pr = item.length - 1;
+		
+		while(pl <= pr) {
+			int mid = (pl+pr)/2;
+			if(item[mid] < key){
+				pl = mid+1;
+			}
+			else if (item[mid]>key) {
+				pr = mid-1;
+			}else {
+				return mid;
+			}
+		}
+		return -1;
 	}
+
 }

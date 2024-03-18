@@ -9,15 +9,6 @@ public Fruit4(String string, int i, String string2) {
 	this.string2 = string2;
 }
 
-//3장 객체 배열 정렬 - binary search
-/*
-* Comparator를 사용하는 방법
-* MyComparator implements Comparator<>
-* MyComparator myComparator = new MyComparator();
-* Arrays.sort(array, myComparator);
-* Collections.sort(list, myComparator);
-*/
-
 import java.util.Arrays;
 import java.util.Comparator;
 class Fruit4 {
@@ -146,6 +137,14 @@ public class Test_실습3_7객체배열이진탐색 {
 //비교연산자는 fruit 객체에 대해 비교 
 
 
+//3장 객체 배열 정렬 - binary search
+/*
+* Comparator를 사용하는 방법
+* MyComparator implements Comparator<>
+* MyComparator myComparator = new MyComparator();
+* Arrays.sort(array, myComparator);
+* Collections.sort(list, myComparator);
+*/
 
 
 

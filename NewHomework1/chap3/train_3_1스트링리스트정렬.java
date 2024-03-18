@@ -81,9 +81,9 @@ public class train_3_1스트링리스트정렬 {
 		    System.out.println();
 		    System.out.println("중복제거::");
 		  
-		    String[] cities = removeDuplicateList(list);
-	        ArrayList<String> lst = new ArrayList<>(Arrays.asList(cities));
-		    showList("중복제거후", newList );
+//		    String[] cities = removeDuplicateList(list);
+//	        ArrayList<String> lst = new ArrayList<>(Arrays.asList(cities));
+		    showList("중복제거후", newList);
 		}
 	}
 
