@@ -36,23 +36,23 @@ public class train_실습3_6_0스트링배열정렬이진탐색 {
 		return -1;
 	}
 	
-	static int binarySearch(String key,String[] data) {
-		int left =0;
-		int right = data.length -1;
-		
-		while(left <= right) {
-			int mid = (left+right)/2;
-			if(data[mid] < key){
-				left = mid+1;
-			}
-			else if (data[mid]>key) {
-				right = mid-1;
-			}
-			else
-				return mid;
-		}
-		return -1;
-	}
+//	static int binarySearch(String key,String[] data) {
+//		int left =0;
+//		int right = data.length -1;
+//		
+//		while(left <= right) {
+//			int mid = (left+right)/2;
+//			if(data[mid] < key){  //compare to 사용 
+//				left = mid+1;
+//			}
+//			else if (data[mid]>key) {
+//				right = mid-1;
+//			}
+//			else
+//				return mid;
+//		}
+//		return -1;
+//	}
 	public static void main(String[] args) {
 		String []data = {"사과","포도","복숭아", "감", "산딸기", "블루베리", "대추", "수박", "참외"};//홍봉희 재배 과수
 
@@ -72,9 +72,9 @@ public class train_실습3_6_0스트링배열정렬이진탐색 {
 		/*
 		 * 교재 109~113
 		 */
-		resultIndex = binarySearch( key,data);
-		System.out.println("\nbinarySearch(배): result = " + resultIndex);
-		key = "산딸기";
+//		resultIndex = binarySearch( key,data);
+//		System.out.println("\nbinarySearch(배): result = " + resultIndex);
+//		key = "산딸기";
 		/*
 		 * 교재 115 Arrays.binarySearch에 의한 검색
 		 */

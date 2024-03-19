@@ -14,39 +14,61 @@ import java.util.Random;
 //int형 고정 길이 큐
 
 class Queue4 {
-	private List<Integer> que;//원형큐로 구현하지 않는다 
-	private int capacity; // 큐의 크기
+	private List<Integer> que;//원형큐로 구현하지 않는다 que는 참조변수 
+	private int capacity; // 큐의 크기 -배열의 length
 	private int front; // 맨 처음 요소 커서
 	private int rear; // 맨 끝 요소 커서
 	private int num; // 현재 데이터 개수
 
+	
+	public objectQueue2 (int maxlen) { //배열의 크기만 매개변수
+		
+	}
+//	public objectQueue2 (que, capacity, front,rear,num)
+	que = new Points3[maxlen];
+	capacity = maxlen;
+	front = rear =0;
+	num = 0;
+	
 //--- 실행시 예외: 큐가 비어있음 ---//
-
+	public 
 
 //--- 실행시 예외: 큐가 가득 찼음 ---//
 
 
 //--- 생성자(constructor) ---//
 public Queue4(int maxlen) {
-
+	capacity = maxlen;
+	try {
+		que = new ArrayList<Integer>(capacity);
+	}catch (OutOfMemoryError e){
+		capacity = 0;
+	}
 }
 
 //--- 큐에 데이터를 인큐 ---//
 	public int enque(int x) throws OverflowQueueException {
-		if (isFull())
-
+		if (isFull()) 
+			throw new OverflowQueueException("가득 찼습니다");
+		que.add(x); 
+		num++;
+		return x;
 	}
 
 //--- 큐에서 데이터를 디큐 ---//
 	public int deque() throws EmptyQueueException {
 		if (isEmpty())
-
+			throw new EmptyQueueException("비어있습니다");
+		que.remove(rear);
+		num--;
+		return rear;
 	}
 
 //--- 큐에서 데이터를 피크(프런트 데이터를 들여다봄) ---//
 	public int peek() throws EmptyQueueException {
 		if (isEmpty())
-
+			throw new EmptyQueueException("비어있습니다.");
+		return que[front];
 	}
 
 //--- 큐를 비움 --- peek() 처럼 예외 발생 구현//
@@ -56,7 +78,7 @@ public Queue4(int maxlen) {
 		 * queue이 empty일 때 clear()가 호출된 예외 발생해야 한다 
 		 */
 		if (isEmpty()) // queue이 빔
-
+			throw new EmptyQueueException("비어있습니다.");
 	}
 //--- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {

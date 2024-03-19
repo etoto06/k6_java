@@ -5,14 +5,11 @@ package NewHomework1.chap4;
  * 정수형 스택 소스 코드
  * 객체스택과 큐에 대한 구현도 정수 스택의 예외처리 방식을 반복 적용함 
  */
-
 import java.util.Scanner;
-
-import Chap4_스택과큐.IntStack4.EmptyIntStackException;
-
+import java.util.Stack;
 //int형 고정 길이 스택
 
-class IntStack4 {
+class IntStack {
 	private int[] stk; // 스택용 배열
 	private int capacity; // 스택의 크기
 	private int ptr; // 스택 포인터 (top)말하는거임 
@@ -28,7 +25,7 @@ class IntStack4 {
 	}
 
 //--- 생성자(constructor) ---//
-	public IntStack4(int maxlen) {
+	public IntStack(int maxlen) {
 		ptr = 0;
 		capacity = maxlen; //사이즈지정
  		try {
@@ -42,9 +39,9 @@ class IntStack4 {
 	
 	
 //--- 스택에 x를 푸시 ---//
-	public void push(int x) throws OverflowIntStackException { // /vldmd flfn.
+	public void push(int x) throws OverflowIntStackException { 
 		if (isFull()) // 스택이 가득 참
-			throw new OverflowIntStackException;
+			throw new OverflowIntStackException();
 		stk[ptr++] = x;
 	}
 
@@ -58,7 +55,7 @@ class IntStack4 {
 //--- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
 	public int peek() throws EmptyIntStackException {
 		if (isEmpty()) // 스택이 빔
-			throw new EmptyIntStackException();
+			throw new EmptyIntStackException(); 
 		return stk[--ptr -1];
 			
 	}
@@ -68,14 +65,13 @@ class IntStack4 {
 //--- 스택을 비움 ---//
 
 	public void clear() throws EmptyIntStackException {
-		
 		/*
 		 * stack을 empty로 만들어야 한다.
 		 * stack이 empty일 때 clear()가 호출된 예외 발생해야 한다 
 		 * pop()으로 구현하지 않는다
 		 */
-		if (isEmpty()) // 스택이 빔
-
+		if (isEmpty())   // 스택이 빔
+			ptr =0;
 	}
 //--- 스택에서 x를 찾아 인덱스(없으면 –1)를 반환 ---//
 	public int indexOf(int x) {
@@ -108,15 +104,20 @@ class IntStack4 {
 //--- 스택 안의 모든 데이터를 바닥 → 정상 순서로 표시 ---//
 	public void dump() throws EmptyIntStackException{
 		if (isEmpty()) {
-
+			System.out.println("스택이 비어있습니다");
+			return;
 	}
+		for (int i = 0; i < ptr; i++) {
+	        System.out.print(stk[i] + " ");
+	    }
+	    System.out.println();
 }
 
 public class 실습4_2정수스택_배열 {
 
 	public static void main(String[] args) {
 		Scanner stdIn = new Scanner(System.in);
-		IntStack4 s = new IntStack4(4); // 최대 64 개를 푸시할 수 있는 스택
+		IntStack s = new IntStack(4); // 최대 64 개를 푸시할 수 있는 스택
 
 		while (true) {
 			System.out.println(); // 메뉴 구분을 위한 빈 행 추가
@@ -135,27 +136,46 @@ public class 실습4_2정수스택_배열 {
 				x = stdIn.nextInt();
 				try {
 					s.push(x);
-				} catch (IntStack4.OverflowIntStackException e) {
+				} catch (IntStack.OverflowIntStackException e) {
 					System.out.println("스택이 가득 찼습니다." + e.getMessage());
 					e.printStackTrace();
 				}
 				break;
 
+//			case 2: // 팝
+//				try {
+//					x = s.pop();
+//					System.out.println("팝한 데이터는 " + x + "입니다.");
+//				} catch (IntStack.EmptyIntStackException e) {Stack
+//					System.out.println("스택이 비어있습니다." + e.getMessage());
+//					e.printStackTrace();
+//				}
+//				break;
+				
 			case 2: // 팝
-				try {
-					x = s.pop();
-					System.out.println("팝한 데이터는 " + x + "입니다.");
-				} catch (IntStack4.EmptyIntStackException e) { stack
-					System.out.println("스택이 비어있습니다." + e.getMessage());
-					e.printStackTrace();
-				}
-				break;
+			    try {
+			        if (!s.isEmpty()) { // 스택이 비어있지 않을 경우에만 팝 연산 수행
+			            x = s.pop();
+			            System.out.println("팝한 데이터는 " + x + "입니다.");
+			        } else {
+			            System.out.println("스택이 비어있습니다.");
+			        }
+			    } catch (IntStack.EmptyIntStackException e) {
+			        System.out.println("스택이 비어있습니다." + e.getMessage());
+			        e.printStackTrace();
+			    }
+			    break;
+
+				
+				
+				
+				
 
 			case 3: // 피크
 				try {
 					x = s.peek();
 					System.out.println("피크한 데이터는 " + x + "입니다.");
-				} catch (IntStack4.EmptyIntStackException e) {
+				} catch (IntStack.EmptyIntStackException e) {
 					System.out.println("스택이 비어있습니다." + e.getMessage());
 					e.printStackTrace();
 				}
