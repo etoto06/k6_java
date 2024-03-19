@@ -1,7 +1,10 @@
-package Chap5_Recursive;
+package NewHomework1.chap5;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+//input [12][15]를 maze[14][17]로 변환 
 
 enum Directions2 {N, NE, E, SE, S, SW, W, NW}
 class Items3 {

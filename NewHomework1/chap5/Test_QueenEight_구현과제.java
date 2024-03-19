@@ -1,5 +1,6 @@
 package NewHomework1.chap5;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/?ref=lbp
@@ -10,7 +11,7 @@ import java.util.List;
  * Rook/가로,세로 이동/다른 기물을 넘을 수없다, bishop/대각선, knight/1-2칸 이동/다른 기물을 넘을 수 있다,
  * pawn/처음 이동은 2칸까지 가능, 그 후 한칸만 가능, 잡을 때는 대각선 가능 체스판 최대 배치 문제 : king/16,
  * Queen/8, rook/8, bishop/?, knight/? rook 2개/a, h, knight 2개/b, g, bishop
- * 2개/c, f, queen 1개/black queen은 black 칸에, 폰 8개
+ * 2개/c, f, queen 1개/black Queen 은 black 칸에, 폰 8개
  */
 class Point {
 	private int ix;
@@ -18,7 +19,7 @@ class Point {
 
 	public Point(int x, int y) {
 		ix = x;
-		iy = y;
+		iy=y;
 	}
 
 	@Override
@@ -53,7 +54,7 @@ class Point {
 
 class Stack4 {
 	// --- 실행시 예외: 스택이 비어있음 ---//
-	// generic class는 Throwable을 상속받을 수 없다 - 지원하지 않는다
+	// generic class 는 Throwable 을 상속받을 수 없다 - 지원하지 않는다
 	public class EmptyGenericStackException extends Exception {
 		private static final long serialVersionUID = 1L;
 
@@ -72,26 +73,43 @@ class Stack4 {
 	private List<Point> data; // 스택용 배열
 	// private List<T> data;
 	private int capacity; // 스택의 크기
-	private int top; // 스택 포인터
+	private int top; // 스택 포인터                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 
 	// --- 생성자(constructor) ---//
 	public Stack4(int capacity) {
-
+		top =0;
+		this.capacity = capacity;
+		try {
+			data = new ArrayList<Point>(capacity);
+		}catch (OutOfMemoryError e) {
+		capacity=0;
+		}
 	}
 
 	// --- 스택에 x를 푸시 ---//
 	public boolean push(Point x) throws OverflowGenericStackException {
-
+		if (isFull()) 
+			throw new OverflowGenericStackException("스택이 가득참");
+		data.add(x);
+		return true;
 	}
 
 	// --- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
 	public Point pop() throws EmptyGenericStackException {
-
-	}
+		if(isEmpty()){
+			throw new EmptyGenericStackException("스택이 비어있음");
+		}
+		Point poppedData = data.remove(top);
+		top--;
+		return poppedData;
+}
 
 	// --- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
 	public Point peek() throws EmptyGenericStackException {
-
+		if(isEmpty()) {
+			throw new EmptyGenericStackException("스택이 비어있음");
+		}
+		return data.get(top);
 	}
 
 	// --- 스택을 비움 ---//
@@ -138,10 +156,9 @@ class Stack4 {
 		}
 	}
 }
-
+//175페이지 코드 사용
 public class Test_QueenEight_구현과제
 {
-
 	public static void EightQueen(int[][] d) {
 		int count = 0;// 퀸 배치 갯수
 		int numberSolutions = 0;
@@ -152,18 +169,18 @@ public class Test_QueenEight_구현과제
 		count++;
 		iy++;
 		st.push(p);// 스택에 현 위치 객체를 push
+		int newCol = -1;
+
 		while (true) {
-//			175페이지 코드 사용
-			if (n > 0) { //체스판의 다음행에 배치할수있으면 
-				s.push(n); //n값 푸시
-				n = n-1;
+			if (newCol = nextMove(d,ix,iy)!=-1) { //갈 곳이랑 가지는지 검사 
+                Point point = new Point(ix, newCol); // 새로운 위치 생성
+                d[ix][newCol] = 1; 
 				continue;
 			}
-			if (s.isEmpty() != true) {
-				n = s.pop();
-//				pop한 위치를 사용해서 다음열을 조사하고 더 이상 없으면 
-				System.out.println(n);
-				n= n-2; //recur(n-2)
+			else {
+				count = newCol.pop();
+				System.out.println(count);
+				count= count-2; //recur(n-2)
 				continue;
 			}
 			break;
@@ -220,13 +237,14 @@ public class Test_QueenEight_구현과제
 
 	// 배열 d에서 (x,y)에 퀸을 배치할 수 있는지 조사
 	public static boolean checkMove(int[][] d, int x, int y) {// (x,y)로 이동 가능한지를 check
-		if (checkRow() & checkCol() & checkDiagSE() & checkDiagSW()) //가로&세로&대각선 검사 
+		if (checkRow(d,x) & checkCol(d, y) & checkDiagSE(d,x,y) & checkDiagSW(d, x, y)) //가로&세로&대각선 검사 
 				return true;
 		else {
 			return false;
 		}
 	}
 
+	
 	// 배열 d에서 현재 위치(row,col)에 대하여 다음에 이동할 위치 nextCol을 반환, 이동이 가능하지 않으면 -1를 리턴
 	public static int nextMove(int[][] d, int row, int col) {// 현재 row, col에 대하여 이동할 col을 return
 		for (int i=col; i < d.length; i++) {

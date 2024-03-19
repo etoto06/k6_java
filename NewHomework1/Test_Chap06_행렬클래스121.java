@@ -44,7 +44,7 @@ class Matrix {
 		//2차원 배열 모양으로 출력하는 코드 작성
 	}
 }
-public class Test_Chap06_행렬클래스 {
+public class Test_Chap06_행렬클래스121 {
 
 	public static void main(String[] args) {
 		/*

@@ -1,4 +1,4 @@
-package Chap5_Recursive;
+package NewHomework1.chap5;
 
 //재귀에 대한 이해를 돕는 순수 재귀 메서드(재귀를 제거)
 
