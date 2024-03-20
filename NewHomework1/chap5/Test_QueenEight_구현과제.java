@@ -46,6 +46,7 @@ class Point {
 	@Override
 	public boolean equals(Object p) {
 		if ((this.ix == ((Point) p).ix) && (this.iy == ((Point) p).iy))
+			//두 포인트 객체의 ix와 iy가 같아야 true반환
 			return true;
 		else
 			return false;
@@ -91,6 +92,7 @@ class Stack4 {
 		if (isFull()) 
 			throw new OverflowGenericStackException("스택이 가득참");
 		data.add(x);
+		top++;
 		return true;
 	}
 
@@ -99,9 +101,7 @@ class Stack4 {
 		if(isEmpty()){
 			throw new EmptyGenericStackException("스택이 비어있음");
 		}
-		Point poppedData = data.remove(top);
-		top--;
-		return poppedData;
+		return data.remove(--top);
 }
 
 	// --- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
@@ -109,7 +109,7 @@ class Stack4 {
 		if(isEmpty()) {
 			throw new EmptyGenericStackException("스택이 비어있음");
 		}
-		return data.get(top);
+		return data.get(top-1);
 	}
 
 	// --- 스택을 비움 ---//
@@ -165,76 +165,138 @@ public class Test_QueenEight_구현과제
 		int ix = 0, iy = 0;// 행 ix, 열 iy
 		Stack4 st = new Stack4(100); // 100개를 저장할 수 있는 스택을 만들고
 		Point p = new Point(ix, iy);// 현 위치를 객체로 만들고
-		d[ix][iy] = 1;// 현 위치에 queen을 넣었다는 표시를 하고
+		d[ix][iy] = 1;// 현 위치에 queen 을 넣었다는 표시를 하고
 		count++;
 		iy++;
+		try {
+			st.push(p);
+		} catch(Stack4.OverflowGenericStackException e) {
+			e.getMessage();
+		}
+		
 		st.push(p);// 스택에 현 위치 객체를 push
 		int newCol = -1;
-
+		
 		while (true) {
-			if (newCol = nextMove(d,ix,iy)!=-1) { //갈 곳이랑 가지는지 검사 
+			newCol = nextMove(d,ix,iy); //다음으로 갈 곳
+			if(newCol !=-1) {// 갈수있는지 검사 
                 Point point = new Point(ix, newCol); // 새로운 위치 생성
                 d[ix][newCol] = 1; 
+                st.push(point);
+                count++;
+                ix++;iy =0;
 				continue;
 			}
 			else {
-				count = newCol.pop();
+				try {
+				p = st.pop();
+				} catch(Stack4.EmptyGenericStackException e) {
+					e.getMessage();
+				}
+				ix = p.getX();iy=p.getY();
+				d[ix][iy]=0;
+				iy++;
+				count--;
 				System.out.println(count);
-				count= count-2; //recur(n-2)
+				
 				continue;
 			}
-			break;
 		}
 	}
 
 	// 배열 d에서 행 cx, 열 cy에 퀸을 남서, 북동 대각선으로 배치할 수 있는지 조사
 	public static boolean checkDiagSW(int[][] d, int cx, int cy) { // x++, y-- or x--,y++  where 0<= x  ,   y <= 7         
-		for(int x=cx, y =cy; x<d.length && y >=0; x++,y--) { //오른쪽 아래	
-			        if (d[x][y] == 1) { //퀸이 이미 있는경우
-			            return false;
-			        }
-			    } 
-		for (int x = cx, y = cy; x >= 0 && y < d.length; x--, y++) {//왼쪽 위
-			        if (d[x][y] == 1) { 
-			            return false;
-			        }
-			    }
-			    return true;
+//		for(int x=cx, y =cy; x<d.length && y >=0; x++,y--) { //오른쪽 아래	
+//			        if (d[x][y] == 1) { //퀸이 이미 있는경우
+//			            return false;
+//			        }
+//			    } 
+//		for (int x = cx, y = cy; x >= 0 && y < d.length; x--, y++) {//왼쪽 위
+//			        if (d[x][y] == 1) { 
+//			            return false;
+//			        }
+//			    }
+		while( cx < d.length && cy < d.length) {//SE
+			if(d[cx][cy] == 1) {
+//				return false;
+				cx++; cy--;
+				continue;
+				}
+			return true;
+		}
+		
+		while( cy < d.length && cx<d.length) {//NW
+			if(d[cx][cy] == 1) {
+//				return false;
+				cx--; cy++;
+				continue;
 			}
+		}
+		return true;
+}
 
 	// 배열 d에서 행 cx, 열 cy에 퀸을 남동, 북서 대각선으로 배치할 수 있는지 조사
 	public static boolean checkDiagSE(int[][] d, int cx, int cy) {// x++, y++ or x--, y--
-		for(int x=cx, y=cy; x<d.length ; x++, y++) {
-			if (d[x][y] == 1) {
-				return false;
+//		for(int x=cx, y=cy; x<d.length ; x++, y++) {
+//			if (d[x][y] == 1) {
+//				return false;
+//				}
+//			}
+//		for(int x=cx, y=cy; x<d.length ; x--, y--) {
+//			if (d[x][y] == 1) {
+//				return false;
+//		}
+		while( cx < d.length && cy<d.length) {//SE
+			if(d[cx][cy] == 1) {
+//				return false;
+				cx++; cy++;
+				continue;
 				}
-			}
-		for(int x=cx, y=cy; x<d.length ; x--, y--) {
-			if (d[x][y] == 1) {
-				return false;
+			return true;
 		}
-	}
+		
+		while( cy < d.length && cx < d.length) {//NW
+			if(d[cx][cy] == 1) {
+//				return false;
+				cx--; cy--;
+				continue;
+				}
+		}
 		return true;
 }
 
 	public static boolean checkRow(int[][] d, int cx) { //가로 검사
-		for(int x=cx; x<d.length ; x++) {
-			if (d[x][0]==1) {
-				return false;
-			}
+//		for(int x=cx; x<d.length ; x++) {
+//			if (d[x][0]==1) {
+//				return false;
+//			}
+//		}
+//		return true;
+		while(cx < d.length) {
+			if (d[cx][0]==1) {
+//				return false;
+				cx++;
+				continue;
+			}	
 		}
 		return true;
 	}
 	
 	public static boolean checkCol(int[][] d, int cy) { //세로 검사
-		for(int y=cy; y<d[0].length ; y++) {
-			if (d[0][y]==1) {
-				return false;
-			}
+//		for(int y=cy; y<d[0].length ; y++) {
+//			if (d[0][y]==1) {
+//				return false;
+//			}
+//		}
+		while(cy < d.length) {
+			if (d[cy][0]==1) {
+//				return false;
+				cy++;
+				continue;
+			}	
 		}
 		return true;
 	}
-
 	// 배열 d에서 (x,y)에 퀸을 배치할 수 있는지 조사
 	public static boolean checkMove(int[][] d, int x, int y) {// (x,y)로 이동 가능한지를 check
 		if (checkRow(d,x) & checkCol(d, y) & checkDiagSE(d,x,y) & checkDiagSW(d, x, y)) //가로&세로&대각선 검사 
@@ -248,8 +310,8 @@ public class Test_QueenEight_구현과제
 	// 배열 d에서 현재 위치(row,col)에 대하여 다음에 이동할 위치 nextCol을 반환, 이동이 가능하지 않으면 -1를 리턴
 	public static int nextMove(int[][] d, int row, int col) {// 현재 row, col에 대하여 이동할 col을 return
 		for (int i=col; i < d.length; i++) {
-			if (checkMove(d, row, col))
-				return col;
+			if (checkMove(d, row, i))
+				return i;
 		}
 		return -1;
 	}
@@ -280,3 +342,8 @@ public class Test_QueenEight_구현과제
 
 	}
 }
+
+//     n
+//	 w	 e
+//	   s	
+//

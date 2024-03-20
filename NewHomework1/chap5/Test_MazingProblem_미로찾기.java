@@ -84,7 +84,7 @@ class Offsets3 {
 	// --- 스택에서 x를 찾아 인덱스(벌견하지 못하면 –1)를 반환 ---//
 	public int indexOf(Items3 x) {
 		for (int i = top - 1; i >= 0; i--) // 정상 쪽에서 선형검색
-			if (data.get(i).equals(x))
+			if (data.get(i).equals(x)) //주소의 값이 같으면 
 				return i; // 검색 성공
 		return -1; // 검색 실패
 	}
@@ -119,40 +119,37 @@ class Offsets3 {
 			System.out.println();
 		}
 	}
-}
-
+}	
 	public class Test_MazingProblem_미로찾기 {
 
 		static Offsets[] moves = new Offsets[8];//static을 선언하는 이유를 알아야 한다
-
+		//프로그램이 실행되는동안 유지되어야해서
+		//미로안에서의 이동 
 		public static void path(int[][] maze, int[][] mark, int ix, int iy) {
-
-			mark[1][1] = 1;
+			mark[1][1] = 1; //출발지점
 			StackList st = new StackList(50);
 			Items temp = new Items(0, 0, 0);//N :: 0
-			temp.x = 1;
-			temp.y = 1;
-			temp.dir = 2;//E:: 2
-			mark[temp.x][temp.y] = 2;//미로 찾기 궤적은 2로 표시
+			temp.x = 1;//아이템의 좌표
+			temp.y = 1;//아이템의 좌표
+			temp.dir = 2;//E:: 2 //아이템의 방향
+			mark[temp.x][temp.y] = 2;// 위치 2로 표시
 			st.push(temp);
 
-			while (!st.isEmpty()) // stack not empty
+			while (!st.isEmpty()) // 스택이 비어있지 않은동안 반복 
 			{
 				Items tmp = st.pop(); // unstack
 				int i = tmp.x;
 				int j = tmp.y;
 				int d = tmp.dir;
 				mark[i][j] = 1;//backtracking 궤적은 1로 표시
-				while (d < 8) // moves forward
+				while (d < 8) // 방향이 8개인동안 반복 
 				{
-
-					if ((g == ix) && (h == iy)) { // reached exit
-													// output path
+					if ((g == ix) && (h == iy)) { // 출구에 도착했는지 확인
+										// output path
 
 					}
-					if ((maze[g][h] == 0) && (mark[g][h] == 0)) { // new position
-
-
+					if ((maze[g][h] == 0) && (mark[g][h] == 0)) { //새로운 위치인지 확인
+						//maze가 0이고 mark가 0인지 확인하기 
 					} else
 
 				}
@@ -200,7 +197,7 @@ class Offsets3 {
 			//d = d + 1;//java는 지원안됨
 			for (int i = 0; i < 14; i++) {
 				for (int j = 0; j < 17; j++) {
-
+					input[i][j]=maze[i][j];
 					// input[][]을 maze[][]로 변환
 				}
 			}
