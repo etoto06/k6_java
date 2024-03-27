@@ -6,15 +6,40 @@ class PhyscData implements Comparable<PhyscData>{
     String name;              // 이름
     int    height;            // 키
     double vision;            // 시력
+    
+    public PhyscData(String name, int height, double vision) {
+        this.name = name;
+        this.height = height;
+        this.vision = vision;
+    }
+
+    public int compareTo(PhyscData other) {
+        return this.height - other.height;
+    }
 }
+
 public class Test_객체merge정렬 {
 	// --- 배열 요소 a[idx1]와 a[idx2]의 값을 교환 ---//
 	static void merge(PhyscData[] a, int lefta, int righta, int leftb, int rightb ) {
-		int temp[]= new int [30];
-		int ix = 0; //temp에 저장된 요소의 개수를 나타낼거
+		PhyscData [] temp= new PhyscData[a.length];
+		int idx = lefta; //temp에 저장된 요소의 개수를 나타낼거
+		
 		while(lefta <= righta && leftb <= rightb) {
-			if( lefta < leftb) temp[ix++] =leftb++;
-			else if ()
+			if( a[lefta].height <= a[leftb].height) {
+				temp[idx++] =a[lefta++];
+			}else {
+				temp[idx++] = a[leftb++];
+			}
+		}
+		
+		while(lefta <= righta) {
+			temp[idx++] = a[lefta++];
+		}
+		while(leftb<=rightb) {
+			temp[idx++] = a[leftb++];
+		}
+		for (int i = rightb; i>lefta; i--) {
+			            a[i] = temp[i];
 		}
 
 	}
