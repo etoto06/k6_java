@@ -4,7 +4,7 @@ package NewHomework1.chap8;
 import java.util.Random;
 import java.util.Scanner;
 
-class Node1 {
+class Node1{
 	int data;
 	Node1 link;
 
@@ -25,19 +25,26 @@ class LinkedList1 {
 	{
 		Node1 q, current = first;
 		q = current;
-
-		return -1;// 삭제할 대상이 없다.
+		
+		if() {
+		return -1;}// 삭제할 대상이 없다.
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		Node1 p = first;
-
+		while (p !=null ) {
+			System.out.println(p.data);
+		}
 	}
 
 	public void Add(int element) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
 	{
 		Node1 newNode = new Node1(element);
-
+		if(first == null) {
+		}
+		if(first.next==null) {
+		}
+		
 	}
 
 	public boolean Search(int data) { // 전체 리스트를 순서대로 출력한다.

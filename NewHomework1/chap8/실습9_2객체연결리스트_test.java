@@ -1,5 +1,4 @@
-
-package Chap9_List;
+package NewHomework1.chap9NEW;
 
 public class 실습9_2객체연결리스트_test {
 
@@ -54,6 +53,10 @@ class SimpleObject {
 		}
 	}
 
+
+
+	
+	
 	// --- 이름으로 순서를 매기는 comparator ---//
 	public static final Comparator<SimpleObject> NAME_ORDER = new NameOrderComparator();
 
@@ -79,7 +82,8 @@ class LinkedList2 {
 		first = null;
 	}
 
-	public int Delete(SimpleObject element, Comparator<SimpleObject> cc) //delete the element
+	public int Delete(SimpleObject element, Comparator<SimpleObject> cc) //delete the element 
+	//삭제를 하려면 찾아야하니까 simpleobject가 
 	{
 
 	}
@@ -151,7 +155,7 @@ public class 객체연결리스트 {
 	            switch (menu = SelectMenu()) {
 	             case Add :                           // 머리노드 삽입
 	            	 data = new SimpleObject();
-	            	 data.scanData("입력", 3);
+	            	 data.scanData("입력", 3); //왜 3을 전달?
 	    	         l.Add(data, SimpleObject.NO_ORDER);
 	                     break;
 	             case Delete :                          // 머리 노드 삭제

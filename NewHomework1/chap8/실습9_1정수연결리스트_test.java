@@ -23,12 +23,17 @@ class Node1 {
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
-
+		Node1 p = first;
+		while (p !=null ) {
+			System.out.println(p.data + " ");
+			p=p.link;
+		}
+		System.out.println();
 	}
 
 	public void Add(int element) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
 	{
-		Node1 = temp = new
+		Node1 newNode = new Node1(element);
 
 	}-
 	public boolean Search(int data) { // 전체 리스트를 순서대로 출력한다.
@@ -65,10 +70,10 @@ public class 정수연결리스트 {
 		Scanner sc = new Scanner(System.in);
 		int key;
 		do {
-			for (Menu m : Menu.values()) {
+			for (Menu m : Menu.values()) { //menu생성자 호출됨 
 				System.out.printf("(%d) %s  ", m.ordinal(), m.getMessage());
-				if ((m.ordinal() % 3) == 2 && m.ordinal() != Menu.Exit.ordinal())
-					System.out.println();
+				if ((m.ordinal() % 3) == 2 && m.ordinal() != Menu.Exit.ordinal()) //2 %3 = 2
+					System.out.println(); //3으로 나눠서 2면 다음걸로 가라는뜻 
 			}
 			System.out.print(" : ");
 			key = sc.nextInt();
