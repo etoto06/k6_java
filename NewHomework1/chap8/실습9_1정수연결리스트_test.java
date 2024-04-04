@@ -15,11 +15,8 @@ class Node1 {
 	
 	public int Delete(int element) // delete the element
 	{	Node1 temp = new Node1(element); 
-	if(first == null) {
-		first = temp;
 		return;
 	}
-
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
@@ -35,7 +32,7 @@ class Node1 {
 	{
 		Node1 newNode = new Node1(element);
 
-	}-
+	}
 	public boolean Search(int data) { // 전체 리스트를 순서대로 출력한다.
 		return true;
 	}
