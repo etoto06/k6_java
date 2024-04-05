@@ -1,4 +1,5 @@
-package NewHomework2.chap10;
+package NewHomework2.chap9_1;
+
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -194,8 +195,8 @@ public ObjectQueue5(int maxlen) {
 				return idx;
 		}
 		return -1; // 검색 실패
-	}
-
+	}	
+	
 //--- 큐의 크기를 반환 ---//
 	public int getCapacity() {
 		return capacity;
@@ -211,6 +212,14 @@ public ObjectQueue5(int maxlen) {
 		return num <= 0;
 	}
 
+	//delete를 할 때 오른쪽/왼쪽 자식의 유무 검사
+	public boolean isLeft() {
+		while()
+		
+		return false;
+	}
+	
+	
 //--- 큐가 가득 찼는가? ---//
 	public boolean isFull() {
 		return num >= capacity;
@@ -337,39 +346,99 @@ class Tree5 {
 			//새 데이터 x가 노드p보다 작으면 왼쪽, 크면 오른쪽
 			else p = p.RightChild;
 		}
-		p = new TreeNode5(); //새로운 노드를 생성하여 p에 할당 
-		p.LeftChild = p.RightChild = null; //왼쪽 오른쪽 자식 초기화
-		p.data =x; //새로운 노드에 데이터 x를 저장
-		
-		if(root==null) root=p; //교재 375페이지  
-		else if ( x< p.data) q.LeftChild =p; //x가 노드p보다 작으면 부모노드의 왼쪽자식으로p
-		else q.RightChild =p;	//만약 x 가 부모노드 q의 데이터보다 크거나 같으면 q의 오른쪽 자식으로 p연결 
-		return true;
-	}
+		 // 새로운 노드를 생성하여 데이터 x를 저장하고, 적절한 위치에 연결함
+	    TreeNode5 newNode = new TreeNode5();
+	    newNode.data = x;
+	    newNode.LeftChild = null;
+	    newNode.RightChild = null;
 
+	    if (root == null) {
+	        root = newNode;
+	    } else if (x < q.data) {
+	        q.LeftChild = newNode;
+	    } else {
+	        q.RightChild = newNode;
+	    }
+	    return true;
+	}
+//		p = new TreeNode5(); //새로운 노드를 생성하여 p에 할당 
+//		p.LeftChild = p.RightChild = null; //왼쪽 오른쪽 자식 초기화
+//		p.data =x; //새로운 노드에 데이터 x를 저장
+//		
+//		if(root==null) root=p; //교재 375페이지  
+//		else if ( x< p.data) q.LeftChild =p; //x가 노드p보다 작으면 부모노드의 왼쪽자식으로p
+//		else q.RightChild =p;	//만약 x 가 부모노드 q의 데이터보다 크거나 같으면 q의 오른쪽 자식으로 p연결 
+//		return true;
+//	}
+
+	
 	boolean delete(int num) {//binary search tree에서 임의 값을 갖는 노드를 찾아 삭제한다.
 		//삭제 대상이 leaf node인 경우, non-leaf node로 구분하여 구현한다 
+		
 		TreeNode5 p = root, q = null, parent = null;
+		//        현제노드                 부모노드 
 		int branchMode = 0; // 1은 left, 2는 right
-		if (root == null)
+		
+		
+		if (root == null) 
+			return false; //빈트리면 삭제 실패 
+		
+		//삭제할 노드 찾기
+		while(p != null && p.data !=num) {
+			parent = p;
+			if(num < p.data) {
+				p = p.LeftChild;
+				branchMode =1;
+			}else {
+				p=p.RightChild;
+				branchMode =2;
+			}
+		}
+		
+		if(p==null)
 			return false;
 		
-		return false;
-
+		while(p.LeftChild ==null && p.RightChild==null) { //리프노드(맨아래)일 경우 
+			if(parent == null)
+				root = null;
+			else if(branchMode == 1)   //p가 parent의 왼쪽인지 오른쪽인지 
+				parent.LeftChild =null;
+			else parent.RightChild = null;
+		}
+	
+		while(p.LeftChild !=null || p.RightChild !=null) { //왼쪽자식이 있거나 오른쪽자식이 있거나 양쪽자식이 있는경우
+			if(p.LeftChild !=null && p.RightChild == null) { //왼쪽자식만 있는경우
+				if(parent.LeftChild == p) parent.LeftChild = p.LeftChild ;
+				else if(parent.RightChild == p) parent.RightChild = p.LeftChild;
+			}
+			
+			else if ( p.LeftChild ==null && p.RightChild !=null) { //오른쪽 자식만 있는경우
+				if(parent.LeftChild ==p) parent.LeftChild = p.RightChild;
+				else if(parent.RightChild == p) parent.RightChild = p.RightChild;
+			}
+			
+			else { //p의 양쪽 자식이 있는 경우 
+				q =p.LeftChild ;
+				 if(q.data < q.LeftChild.data) p = q.LeftChild;
+				 if(q.data < q.RightChild.data) p = q.RightChild;
+				 else q=p;				 
+			}
+		}
+	return true;
 	}
 
+	
+	
 	boolean search(int num) {//num 값을 binary search tree에서 검색
 		TreeNode5 p = root;
 		
-		if(p.data == num) return true;
-	while(p.data !=num) {
-		if (p==null) return false;	
-		else if(num <p.data) {
+	while(p != null) {
+		if (p.data == num)
+			return true;	
+		else if(num <p.data) 
 			p=p.LeftChild;
-		}
-		else if(num >p.data) {
+		else if(num >p.data) 
 			p=p.RightChild;
-		}
 	}
 	return false;
 	}
